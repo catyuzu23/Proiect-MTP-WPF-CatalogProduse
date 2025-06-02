@@ -7,6 +7,25 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <!-- Menubar rezervat -->
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
+        <!-- Meniu lateral (gol pentru moment) -->
+        <StackPanel Background="#2e2e2e" Grid.Column="0">
+            <TextBlock Text="MENIU" Foreground="White" FontWeight="Bold"
+                       FontSize="16" Margin="10"/>
+            <!-- Aici adăugăm butoane mai târziu -->
+        </StackPanel>
+
+        <!-- Zona principală cu date -->
+        <Grid Grid.Column="1" Margin="10">
+            <DataGrid Name="dataGridExercitii"
+                      AutoGenerateColumns="True"
+                      IsReadOnly="True"
+                      Margin="0,10,0,0"/>
+        </Grid>
     </Grid>
 </Window>
