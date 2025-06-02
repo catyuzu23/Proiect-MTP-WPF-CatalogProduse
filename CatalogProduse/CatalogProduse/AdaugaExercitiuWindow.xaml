@@ -1,0 +1,35 @@
+﻿<Window x:Class="CatalogProduse.AdaugaExercitiuWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CatalogProduse"
+        mc:Ignorable="d"
+        Title="AdaugaExercitiuWindow" Height="450" Width="800">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="0,10">
+            <TextBlock Text="Nume:"/>
+            <TextBox x:Name="txtName" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Margin="0,10">
+            <TextBlock Text="Serii:"/>
+            <TextBox x:Name="txtSerii" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Margin="0,10">
+            <TextBlock Text="Repetări:"/>
+            <TextBox x:Name="txtRepetari" />
+        </StackPanel>
+
+        <Button Grid.Row="3" Content="Adaugă" Width="100" HorizontalAlignment="Center"
+                Margin="0,15" Click="BtnAdauga_Click"/>
+    </Grid>
+</Window>
