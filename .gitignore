@@ -1,0 +1,43 @@
+# Build folders
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio / Rider
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Fișiere temporare Visual Studio
+*.log
+*.cache
+*.ilk
+*.pdb
+*.svclog
+
+# Pachete NuGet
+*.nupkg
+packages/
+
+# Fisiere generate de dotnet
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Folder cu configurări VS Code
+.vscode/
+
+# Resx Designer auto-generate
+*.Designer.cs
+
+# Configurații IIS Express
+*.vs\config\applicationhost.config
+
+# Folder “publish” (dacă apare)
+publish/
+
+# Alte fișiere binare temporare
+*.dll
+*.exe
+*.app
