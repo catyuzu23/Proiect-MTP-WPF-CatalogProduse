@@ -115,6 +115,52 @@ public partial class MainWindow : Window
         }
     }
 
+    private void DataGridExercitii_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        if (dataGridExercitii.SelectedItem is Exercitiu exercitiu)
+        {
+            DragDrop.DoDragDrop(dataGridExercitii, exercitiu, DragDropEffects.Move);
+        }
+    }
+
+    private void Push_Drop(object sender, DragEventArgs e)
+    {
+        if (e.Data.GetData(typeof(Exercitiu)) is Exercitiu ex)
+            listPush.Items.Add(ex.Name);
+    }
+
+    private void Pull_Drop(object sender, DragEventArgs e)
+    {
+        if (e.Data.GetData(typeof(Exercitiu)) is Exercitiu ex)
+            listPull.Items.Add(ex.Name);
+    }
+
+    private void Legs_Drop(object sender, DragEventArgs e)
+    {
+        if (e.Data.GetData(typeof(Exercitiu)) is Exercitiu ex)
+            listLegs.Items.Add(ex.Name);
+    }
+
+    private void ListPush_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    {
+        if (listPush.SelectedItem != null)
+            listPush.Items.Remove(listPush.SelectedItem);
+    }
+
+    private void ListPull_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    {
+        if (listPull.SelectedItem != null)
+            listPull.Items.Remove(listPull.SelectedItem);
+    }
+
+    private void ListLegs_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    {
+        if (listLegs.SelectedItem != null)
+            listLegs.Items.Remove(listLegs.SelectedItem);
+    }
+
+
+
 
 
 }
