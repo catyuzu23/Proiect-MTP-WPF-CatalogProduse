@@ -11,6 +11,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.EntityFrameworkCore;
+using PdfSharp.Pdf;
+using PdfSharp.Drawing;
+using System.Diagnostics;
 
 
 namespace CatalogProduse;
@@ -22,6 +25,8 @@ public partial class MainWindow : Window
 {
     public MainWindow()
     {
+
+        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         InitializeComponent();
         IncarcaExercitii();
     }
@@ -159,7 +164,60 @@ public partial class MainWindow : Window
             listLegs.Items.Remove(listLegs.SelectedItem);
     }
 
+    private void BtnGenereazaPdf_Click(object sender, RoutedEventArgs e)
+    {
+        PdfDocument document = new PdfDocument();
+        document.Info.Title = "Antrenament Personalizat";
+        PdfPage page = document.AddPage();
+        XGraphics gfx = XGraphics.FromPdfPage(page);
+        XFont font = new XFont("Verdana", 12, XFontStyle.Regular);
+        XFont titleFont = new XFont("Verdana", 16, XFontStyle.Bold);
 
+        int yPoint = 40;
+
+        // Titlu
+        gfx.DrawString("Antrenament Personalizat", titleFont, XBrushes.Black,
+            new XRect(0, yPoint, page.Width, page.Height),
+            XStringFormats.TopCenter);
+
+        yPoint += 40;
+
+        // Secțiune Push
+        gfx.DrawString("Push:", titleFont, XBrushes.Black, 40, yPoint);
+        yPoint += 30;
+        foreach (var item in listPush.Items)
+        {
+            gfx.DrawString("- " + item.ToString(), font, XBrushes.Black, 60, yPoint);
+            yPoint += 20;
+        }
+
+        yPoint += 20;
+
+        // Secțiune Pull
+        gfx.DrawString("Pull:", titleFont, XBrushes.Black, 40, yPoint);
+        yPoint += 30;
+        foreach (var item in listPull.Items)
+        {
+            gfx.DrawString("- " + item.ToString(), font, XBrushes.Black, 60, yPoint);
+            yPoint += 20;
+        }
+
+        yPoint += 20;
+
+        // Secțiune Legs
+        gfx.DrawString("Legs:", titleFont, XBrushes.Black, 40, yPoint);
+        yPoint += 30;
+        foreach (var item in listLegs.Items)
+        {
+            gfx.DrawString("- " + item.ToString(), font, XBrushes.Black, 60, yPoint);
+            yPoint += 20;
+        }
+
+        // Salvare
+        string filename = "Antrenament_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".pdf";
+        document.Save(filename);
+        Process.Start("explorer.exe", filename);
+    }
 
 
 

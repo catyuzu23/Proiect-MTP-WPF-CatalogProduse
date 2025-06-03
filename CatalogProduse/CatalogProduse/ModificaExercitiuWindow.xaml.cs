@@ -46,35 +46,41 @@ namespace CatalogProduse
 
         private void BtnSalveaza_Click(object sender, RoutedEventArgs e)
         {
-            if (comboExercitii.SelectedItem is not Exercitiu selectat)
+            if (comboExercitii.SelectedItem == null)
             {
-                MessageBox.Show("Selectează un exercițiu.");
+                MessageBox.Show("Selectați un exercițiu din listă!", "Eroare", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            if (!int.TryParse(txtSerii.Text, out int serii) ||
-                !int.TryParse(txtRepetari.Text, out int repetari))
+            if (!int.TryParse(txtSerii.Text, out int serii) || serii <= 0)
             {
-                MessageBox.Show("Introdu valori numerice valide!");
+                MessageBox.Show("Introduceți un număr valid (pozitiv) de serii!", "Eroare", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            using var context = new AppDbContext();
-            var exercitiu = context.Exercitii.Find(selectat.Id);
+            if (!int.TryParse(txtRepetari.Text, out int repetari) || repetari <= 0)
+            {
+                MessageBox.Show("Introduceți un număr valid (pozitiv) de repetări!", "Eroare", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
-            if (exercitiu != null)
+            var exercitiu = comboExercitii.SelectedItem as Exercitiu;
+
+            using (var context = new AppDbContext())
             {
-                exercitiu.Serii = serii;
-                exercitiu.Repetari = repetari;
-                context.SaveChanges();
-                MessageBox.Show("Modificat cu succes!");
-                this.DialogResult = true;
-                this.Close();
+                var ex = context.Exercitii.FirstOrDefault(e => e.Id == exercitiu.Id);
+                if (ex != null)
+                {
+                    ex.Serii = serii;
+                    ex.Repetari = repetari;
+                    context.SaveChanges();
+                }
             }
-            else
-            {
-                MessageBox.Show("Eroare la modificare!");
-            }
+
+            this.DialogResult = true;
+            this.Close();
         }
+
+
     }
 }

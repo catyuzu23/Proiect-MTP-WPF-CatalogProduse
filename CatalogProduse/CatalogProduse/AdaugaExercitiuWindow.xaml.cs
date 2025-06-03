@@ -23,15 +23,26 @@ namespace CatalogProduse
             InitializeComponent();
         }
 
+
         private void BtnAdauga_Click(object sender, RoutedEventArgs e)
         {
             string name = txtName.Text.Trim();
-            bool seriiOk = int.TryParse(txtSerii.Text, out int serii);
-            bool repetariOk = int.TryParse(txtRepetari.Text, out int repetari);
 
-            if (string.IsNullOrWhiteSpace(name) || !seriiOk || !repetariOk)
+            if (string.IsNullOrWhiteSpace(name))
             {
-                MessageBox.Show("Completează toate câmpurile corect!", "Eroare", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Introduceți un nume pentru exercițiu!", "Eroare", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (!int.TryParse(txtSerii.Text, out int serii) || serii <= 0)
+            {
+                MessageBox.Show("Introduceți un număr valid (pozitiv) de serii!", "Eroare", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (!int.TryParse(txtRepetari.Text, out int repetari) || repetari <= 0)
+            {
+                MessageBox.Show("Introduceți un număr valid (pozitiv) de repetări!", "Eroare", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
